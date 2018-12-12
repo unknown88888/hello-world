@@ -4,13 +4,14 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
-                sh 'touch /home/user/.jenkins/workspace/My_Pipeline_master/testfile'
+                sh 'mkdir build/libs/'
+                sh 'touch build/libs/testfile.txt'
             }
         }
     }
     post {
         always {
-            junit 'build/reports/**/*.xml'
+            archiveArtifacts 'build/libs/*.txt' 
         }
     }
 }
