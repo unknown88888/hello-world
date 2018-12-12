@@ -23,7 +23,7 @@ pipeline {
         }
         failure {
             echo 'I failed :('
-            mail to: 'user@deb9',
+            mail to: 'user@localhost',
               subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
               body: "Something is wrong with ${env.BUILD_URL}"
         }
