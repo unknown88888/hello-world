@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
-                sh 'mkdir build/libs/'
+                sh 'mkdir p build/libs/'
                 sh 'touch build/libs/testfile.txt'
             }
         }
@@ -29,6 +29,19 @@ pipeline {
         }
         changed {
             echo 'Things were different before...'
+        }
+    }
+    
+
+    stage('Sanity check') {
+        steps {
+            input "Does the staging environment look ok?"
+        }
+    }
+
+    stage('Deploy - Production') {
+        steps {
+            sh 'echo ./deploy production'
         }
     }
 }
