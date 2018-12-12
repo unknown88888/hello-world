@@ -12,6 +12,23 @@ pipeline {
     post {
         always {
             archiveArtifacts 'build/libs/*.txt' 
+            echo 'One way or another, I have finished'
+            deleteDir() /* clean up our workspace */
+        }
+        success {
+            echo 'I succeeeded!'
+        }
+        unstable {
+            echo 'I am unstable :/'
+        }
+        failure {
+            echo 'I failed :('
+            mail to: 'user@deb9',
+              subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+              body: "Something is wrong with ${env.BUILD_URL}"
+        }
+        changed {
+            echo 'Things were different before...'
         }
     }
 }
