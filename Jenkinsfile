@@ -4,6 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
+                sh 'touch /home/user/.jenkins/workspace/My_Pipeline_master/testfile'
             }
         }
     }
