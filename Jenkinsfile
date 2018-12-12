@@ -4,7 +4,7 @@ pipeline {
         stage('build') {
             steps {
                 sh 'python --version'
-                sh 'mkdir p build/libs/'
+                sh 'mkdir -p build/libs/'
                 sh 'touch build/libs/testfile.txt'
             }
         }
