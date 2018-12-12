@@ -8,6 +8,19 @@ pipeline {
                 sh 'touch build/libs/testfile.txt'
             }
         }
+        
+        stage('Sanity check') {
+            steps {
+                input "Does the staging environment look ok?"
+            }
+        }
+
+        stage('Deploy - Production') {
+            steps {
+                sh 'echo ./deploy production'
+            }
+        }
+        
     }
     post {
         always {
@@ -29,19 +42,6 @@ pipeline {
         }
         changed {
             echo 'Things were different before...'
-        }
-    }
-    
-
-    stage('Sanity check') {
-        steps {
-            input "Does the staging environment look ok?"
-        }
-    }
-
-    stage('Deploy - Production') {
-        steps {
-            sh 'echo ./deploy production'
         }
     }
 }
